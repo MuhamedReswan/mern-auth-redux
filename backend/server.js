@@ -3,8 +3,10 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoute from "../backend/routes/userRoutes.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
+connectDB();
 
 const port = process.env.PORT || 5000;
 const app = express();
