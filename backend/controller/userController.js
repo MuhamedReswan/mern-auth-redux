@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import User from "../model/userModel.js";
 
 const authUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Auth User" });
