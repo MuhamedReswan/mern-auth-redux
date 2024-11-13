@@ -9,7 +9,7 @@ const hashPassword = async (password) => {
 
 const matchPassword = async(password,dbPassword)=>{
   console.log("matchPassword invoked");
-  return out = await bcrypt.compare(password, dbPassword);
+  return await bcrypt.compare(password, dbPassword);
 }
 
 
