@@ -1,14 +1,13 @@
 // import React from 'react'
-
+import { Outlet } from "react-router-dom";
 import Header from "./components/Header.jsx";
-import HomeScreen from "./screens/HomeScreen.jsx";
 
 const App = () => {
   return (
     <>
       <div className="bg-yellow-500">
         <Header />
-        <HomeScreen />
+        <Outlet />
       </div>
     </>
   );
