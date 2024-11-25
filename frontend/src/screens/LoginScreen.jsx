@@ -27,14 +27,20 @@ const LoginScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("form submitted");
+    if (!email.trim() || !password.trim()) {
+      toast.error('Please fill in all fields.');
+    } else if (!email.endsWith('@gmail.com')) {
+      toast.error('Please enter a valid email address.');
+    } else if (password.length < 6) {
+      toast.error('Password must be at least 6 characters long and include at least one uppercase letter, one number, and one special character.');
+    } else {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
     } catch (err) {
       toast.error(err?.data?.message || err.error);
-      console.log(err?.data?.message || err.error);
     }
+  }
   };
   return (
     <FormContainer>
