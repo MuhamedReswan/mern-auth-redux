@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
 
 const userSchema = mongoose.Schema(
   {
@@ -16,6 +15,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    profileImage:{
+      type:String,
+    }
   },
   { timestamps: true }
 );

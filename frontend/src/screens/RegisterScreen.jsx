@@ -40,16 +40,16 @@ const RegisterScreen = () => {
       toast.error("Email should end with @gmail.com.");
     } else if (name.trim().length < 3) {
       toast.error("Name should be at least 3 characters.");
+    } else if (!/^[A-Za-z\s]+$/.test(name)) {
+      toast.error("Name should only contain letters and spaces.");
     } else if (
-      !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(
-        password
-      )
+      !/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/.test(password)
     ) {
       toast.error(
         "Password must be at least 6 characters long and include at least one uppercase letter, one number, and one special character."
       );
     } else if (password !== confirmPassword) {
-      toast.error("Passwords do not match.");
+      toast.error("Confirm Passwords do not match.");
     } else {
       try {
         const res = await registerApiCall({

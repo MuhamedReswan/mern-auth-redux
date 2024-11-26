@@ -7,13 +7,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
-    <>
+    <div className="h-screen">
         <Header />
         <ToastContainer/>
-        <Container className="my-2 bg-yellow-400">
+        <Container className="flex justify-center items-center my-2 bg-gray-600">
           <Outlet />
         </Container>
-    </>
+    </div>
   );
 };
 
