@@ -3,6 +3,9 @@ import User from "../model/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import { hashPassword, matchPassword } from "../utils/passwordModify.js";
 
+// @desc Auth user/set token
+// route POST /api/users/auth
+// @access Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   console.log("req.body", req.body);
@@ -17,7 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
 
     if (isPasswordCorrect) {
       console.log("wiht success authentication");
-      generateToken(res, user._id);
+      generateToken(res, user._id,'userJwt');
       res.status(201).json({
         _id: user._id,
         name: user.name,
@@ -33,6 +36,10 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @desc Register a new user
+// route POST /api/users/
+// @access Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
@@ -56,7 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    generateToken(res, user._id);
+    generateToken(res, user._id,'userJwt');
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -68,9 +75,13 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @desc Logout user
+// route POST /api/users/logout
+// @access Public
 const logoutUser = asyncHandler(async (req, res) => {
   console.log("logout invoked");
-  res.cookie("jwt", "", {
+  res.cookie("userJwt", "", {
     httpOnly: true,
     expires: new Date(0),
   });
@@ -78,6 +89,10 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "User logged out" });
 });
 
+
+// @desc Get User Profile
+// route GET /api/users/profile
+// @access private
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = {
     _id: req.user._id,
@@ -88,6 +103,10 @@ const getUserProfile = asyncHandler(async (req, res) => {
   res.status(200).json({ user });
 });
 
+
+// @desc Update User Profile
+// route PUT /api/users/profile
+// @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
