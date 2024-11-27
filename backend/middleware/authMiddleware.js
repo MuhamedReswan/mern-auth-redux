@@ -6,7 +6,7 @@ const protect = asyncHandler(async (req, res, next) => {
   let token;
   console.log("req.cookies",req.cookies)
 
-  token = req.cookies.jwt;
+  token = req.cookies.userJwt;
   console.log("token",token)
 
   if (token) {

@@ -7,6 +7,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    isAdmin:{
+      type:Boolean,
+      default:false
+    },
     email: {
       type: String,
       required: true,
@@ -18,6 +22,7 @@ const userSchema = mongoose.Schema(
     },
     profileImage:{
       type:String,
+      default:'null'
     }
   },
   { timestamps: true }
